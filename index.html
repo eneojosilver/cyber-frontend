@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cyber Portfolio</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #0f172a;
+      color: white;
+      text-align: center;
+      padding: 50px;
+    }
+
+    input {
+      padding: 10px;
+      margin: 10px;
+      width: 250px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #22c55e;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .box {
+      background: #1e293b;
+      padding: 30px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="box">
+  <h2>Cyber Portfolio 🔐</h2>
+
+  <input id="username" placeholder="Username"><br>
+  <input id="password" type="password" placeholder="Password"><br>
+
+  <button onclick="register()">Register</button>
+  <button onclick="login()">Login</button>
+
+  <p id="result"></p>
+</div>
+
+<script>
+const BASE_URL = "https://cyber-portfolio-production-93df.up.railway.app";
+
+function register() {
+  fetch(BASE_URL + "/register", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      username: username.value,
+      password: password.value
+    })
+  })
+  .then(res => res.text())
+  .then(data => result.innerText = data);
+}
+
+function login() {
+  fetch(BASE_URL + "/login", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      username: aspida.value,
+      password: password.value
+    })
+  })
+  .then(res => res.text())
+  .then(data => {
+    if(data === "SUCCESS"){
+      window.location.href = "dashboard.html";
+    } else {
+      result.innerText = "Login failed";
+    }
+  });
+}
+</script>
+
+</body>
+</html>
