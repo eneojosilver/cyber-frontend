@@ -47,7 +47,24 @@
 
   <button onclick="register()">Register</button>
   <button onclick="login()">Login</button>
+function register() {
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
 
+  fetch(BASE_URL + "/register", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      username: username,
+      password: password
+    })
+  })
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById("result").innerText = data;
+  })
+  .catch(err => console.error(err));
+}
   <p id="result"></p>
 </div>
 
